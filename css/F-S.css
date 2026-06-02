@@ -1,0 +1,403 @@
+/* style.css - Minimal con sfondo azzurrino totale */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Applichiamo lo sfondo a tutto lo schermo disponibile */
+html, body {
+    min-height: 100vh;
+    background-color: #e3f2fd; /* Azzurrino chiaro ben visibile */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+}
+
+/* Header fisso (sticky) e totalmente coprente */
+header {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    border-bottom: 1px solid #d0d7de;
+    padding: 18px 20px;
+    text-align: center;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+header h1 {
+    font-size: 22px;
+    color: #1a202c;
+    font-weight: 700;
+}
+
+header p {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+nav {
+    margin-top: 12px;
+}
+
+nav a {
+    color: #4a5568;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #3182ce;
+}
+
+/* Blocco di contenuto bianco per staccare dallo sfondo azzurro */
+main {
+    margin: 40px auto;
+    width: 90%;
+    max-width: 760px;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+h2 {
+    color: #1a202c;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+p {
+    color: #4a5568;
+    margin-bottom: 18px;
+    text-align: justify;
+}
+
+/* Contenitore dei bottoni principali */
+.button-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 35px;
+}
+
+/* Bottoni con sfumature moderne e pulite */
+.btn {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Gradiente Blu Moderno */
+.btn-scuola {
+    background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+}
+
+/* Gradiente Verde/Teal Moderno */
+.btn-fuori {
+    background: linear-gradient(135deg, #319795 0%, #2c7a7b 100%);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Ottimizzazione per smartphone */
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    main {
+        padding: 25px;
+        margin: 20px auto;
+    }
+}
+
+
+
+/* --- STILE DEL CAROSELLO MINIMALE --- */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 30px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background-color: #f8f9fa;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Altezza fissa del carosello */
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mostra solo la slide attiva */
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Mostra l'immagine intera senza tagliarla */
+    background-color: #f1f5f9; /* Sfondo azzurrino/grigio neutro per riempire lo spazio vuoto se la foto non è in proporzione */
+}
+
+/* Didascalia sotto l'immagine */
+.carousel-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2d3748;
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Frecce di navigazione */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #e2e8f0;
+    color: #2d3748;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 16px;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.carousel-btn:hover {
+    background: #ffffff;
+    color: #3182ce;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
+
+/* Adattamento per schermi più piccoli */
+@media (max-width: 600px) {
+    .carousel-track {
+        height: 250px; /* Riduce l'altezza su smartphone */
+    }
+    .carousel-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* --- EFFETTO IMMAGINE INGRANDITA (LIGHTBOX) --- */
+
+/* Cambiamo il cursore del mouse sulle foto del carosello per far capire che sono cliccabili */
+.carousel-slide img {
+    cursor: zoom-in;
+}
+
+/* Lo sfondo nero trasparente a tutto schermo */
+.modal {
+    display: none; /* Nascosto di default, si attiverà col JS */
+    position: fixed;
+    z-index: 10000; /* Rimane sopra a tutto, anche all'header sticky */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: zoom-out; /* Il cursore indica che cliccando si chiude */
+}
+
+/* La foto ingrandita */
+.modal-content {
+    max-width: 85%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: zoomFading 0.25s ease; /* Effetto zoom morbido all'apertura */
+}
+
+/* Didascalia sotto la foto ingrandita */
+#modal-caption {
+    color: #ffffff;
+    margin-top: 15px;
+    font-size: 16px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+/* Bottone a X per chiudere in alto a destra */
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Animazione dello zoom */
+@keyframes zoomFading {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* --- FRECCE DI NAVIGAZIONE DENTRO LO ZOOM --- */
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 10001;
+    transition: all 0.2s ease;
+}
+
+.modal-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #3182ce;
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.modal-prev {
+    left: 30px;
+}
+
+.modal-next {
+    right: 30px;
+}
+
+/* Nasconde le frecce dello zoom su smartphone per non coprire lo schermo (lì l'utente può comunque scorrere cliccando vicino ai bordi) */
+@media (max-width: 600px) {
+    .modal-nav-btn {
+        padding: 10px 14px;
+        font-size: 18px;
+        background: rgba(0, 0, 0, 0.5); /* Più scure su mobile per leggibilità */
+    }
+    .modal-prev { left: 10px; }
+    .modal-next { right: 10px; }
+}
+
+
+
+
+
+
+/* Stile per gli elenchi puntati */
+main ul {
+    margin-bottom: 18px;
+    padding-left: 25px; /* Spazio a sinistra per i pallini */
+    color: #4a5568;
+}
+
+main li {
+    margin-bottom: 3px; /* Spazio leggero tra una materia e l'altra */
+}
+
+/* AVVICINAMENTO: Se la lista è subito dopo un paragrafo, riduce lo spazio */
+p + ul {
+    margin-top: -10px; 
+}
+
+
+
+
+
+
+
+/* --- SEZIONI MATERIE (MINIMAL) --- */
+.subject-sections {
+    margin-top: 50px; /* Distanza dall'elenco puntato sopra */
+}
+
+.subject-box {
+    margin-bottom: 40px; /* Spazio tra una materia e l'altra */
+}
+
+/* La riga di divisione: sottile e sfumata ai lati per non appesantire */
+.subject-hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, rgba(226, 232, 240, 0.2), #cbd5e1, rgba(226, 232, 240, 0.2));
+    margin-bottom: 20px;
+}
+
+/* Titoli delle singole materie */
+.subject-box h3 {
+    color: black; /* Blu coordinato con i bottoni principali */
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase; /* Rende il titolo in maiuscolo per stile */
+    letter-spacing: 0.5px;
+}
+
+/* Spaziatura del testo dentro le materie */
+.subject-box p {
+    font-size: 15px;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+
+
+/* --- STILE PER LE IMMAGINI DENTRO LE MATERIE --- */
+.subject-img, .subject-video {
+    display: block;
+    width: 100%;            /* Sfrutta tutta la larghezza disponibile del riquadro bianco */
+    max-width: 100%;        /* Impedisce tassativamente alla foto di uscire dai bordi */
+    height: auto;           /* Mantiene le proporzioni corrette senza deformare o schiacciare il contenuto */
+    max-height: 350px;      /* Limita l'altezza massima per evitare che foto verticali diventino gigantesche */
+    object-fit: contain;      /* Se la foto supera i 350px, la taglia proporzionalmente in modo pulito */
+    margin-top: 15px;       /* Crea lo spazio corretto tra la fine del testo e l'inizio della foto */
+    border-radius: 8px;     /* Angoli arrotondati, coerenti con il carosello e il layout del sito */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}

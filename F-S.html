@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuori dalla Scuola - Australia</title>
+    <link rel="stylesheet" href="css/F-S.css">
+</head>
+<body>
+
+    <header>
+        <h1>Australia 2025</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="Scuola.html">La Scuola</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Fuori dalla scuola</h2>
+        <p>Fuori dall'orario scolastico passavo la vita con la mia famiglia ospitante e con gli amici appena conosciuti.</p>
+		
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-slide active">
+                    <img src="img-f/famiglia.jpg" alt="Australia 1" onclick="openModal(0, this)">
+                    <div class="carousel-caption">La famiglia ospitante</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img-f/amici-lago.jpg" alt="Australia 2" onclick="openModal(1, this)">
+                    <div class="carousel-caption">Io, la mia famglia ospitante ed alcuni amici al lago</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img-f/foto-finale.jpg" alt="Australia 3" onclick="openModal(2, this)">
+                    <div class="carousel-caption">Io, la famiglia ospitante ed alcuni amici</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img-f/casa.jpg" alt="Australia 4" onclick="openModal(3, this)">
+                    <div class="carousel-caption">Il giardino della casa dove ho alloggiato</div>
+                </div>
+            </div>
+
+            <button class="carousel-btn prev-btn" onclick="moveSlide(-1, this)">&#10094;</button>
+            <button class="carousel-btn next-btn" onclick="moveSlide(1, this)">&#10095;</button>
+        </div>
+		
+        <p>La mia famiglia ospitante mi ha portato a visitare la cittadina e con loro ho fatto numerose escursioni nei giorni liberi dalla scuola.</p>
+	
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-slide active">
+                    <img src="img-f/cocco.jpg" alt="Australia 1" onclick="openModal(0, this)">
+                    <div class="carousel-caption"></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img-f/cricket.jpg" alt="Australia 2" onclick="openModal(1, this)">
+                    <div class="carousel-caption"></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img-f/lago-canoe.jpg" alt="Australia 3" onclick="openModal(2, this)">
+                    <div class="carousel-caption"></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="img-f/wallaby.jpg" alt="Australia 4" onclick="openModal(3, this)">
+                    <div class="carousel-caption"></div>
+                </div>
+            </div>
+
+            <button class="carousel-btn prev-btn" onclick="moveSlide(-1, this)">&#10094;</button>
+            <button class="carousel-btn next-btn" onclick="moveSlide(1, this)">&#10095;</button>
+        </div>
+
+    </main>
+
+    <div id="image-modal" class="modal" onclick="closeModal()">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        
+        <button class="modal-nav-btn modal-prev" onclick="event.stopPropagation(); moveSlide(-1)">&#10094;</button>
+        <img class="modal-content" id="modal-img" onclick="event.stopPropagation()">
+        <button class="modal-nav-btn modal-next" onclick="event.stopPropagation(); moveSlide(1)">&#10095;</button>
+        
+        <div id="modal-caption" onclick="event.stopPropagation()"></div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let activeCarousel = null; 
+
+        // Funzione di scorrimento generica
+        function moveSlide(direction, element) {
+            const carousel = element ? element.closest('.carousel-container') : activeCarousel;
+            if (!carousel) return;
+
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            if (slides.length === 0) return;
+
+            let localIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+            
+            slides[localIndex].classList.remove('active');
+            localIndex = (localIndex + direction + slides.length) % slides.length;
+            slides[localIndex].classList.add('active');
+
+            currentSlide = localIndex;
+            if (document.getElementById("image-modal").style.display === "flex") {
+                updateModalContent();
+            }
+        }
+
+        // Funzione per aprire lo zoom
+        function openModal(index, imgElement) {
+            activeCarousel = imgElement.closest('.carousel-container');
+            currentSlide = index;
+
+            const slides = activeCarousel.querySelectorAll('.carousel-slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+
+            document.getElementById("image-modal").style.display = "flex";
+            updateModalContent();
+        }
+
+        // Aggiorna lo zoom con la foto corretta
+        function updateModalContent() {
+            if (!activeCarousel) return;
+            const slides = activeCarousel.querySelectorAll('.carousel-slide');
+            
+            const modalImg = document.getElementById("modal-img");
+            const modalCaption = document.getElementById("modal-caption");
+            
+            const activeImg = slides[currentSlide].querySelector('img');
+            const activeCaption = slides[currentSlide].querySelector('.carousel-caption');
+            
+            modalImg.src = activeImg.src;
+            modalCaption.innerText = activeCaption ? activeCaption.innerText : "";
+        }
+
+        // Chiude lo zoom
+        function closeModal() {
+            document.getElementById("image-modal").style.display = "none";
+            activeCarousel = null; 
+        }
+
+        // Tasti della tastiera
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById("image-modal").style.display === "flex") {
+                if (e.key === "ArrowLeft") moveSlide(-1);
+                if (e.key === "ArrowRight") moveSlide(1);
+                if (e.key === "Escape") closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
